@@ -12,7 +12,7 @@ VPN=ppp0
   $IPTABLES -A allowed-connection -m state --state ESTABLISHED,RELATED -j ACCEPT
   $IPTABLES -A allowed-connection -i $INTERFACE -m limit -j LOG --log-prefix \
       "FWIP Bad packet from ${INTERFACE}:"
-$IPTABLES -A allowed-connection -o $INTERFACE -m limit -j LOG --log-prefix \
+  $IPTABLES -A allowed-connection -o $INTERFACE -m limit -j LOG --log-prefix \
       "FWIP Bad packet from ${INTERFACE}:"
   $IPTABLES -A allowed-connection -j DROP
 
@@ -180,8 +180,7 @@ $IPTABLES -A allowed-connection -o $INTERFACE -m limit -j LOG --log-prefix \
   $IPTABLES -N allow-dns-traffic-out
   $IPTABLES -F allow-dns-traffic-out
   $IPTABLES -A allow-dns-traffic-out -p udp --dport domain -j ACCEPT
-  $IPTABLES -A allow-dns-traffic-out -p udp --dport domain -j ACCEPT
-  $IPTABLES -A allow-dns-traffic-out -p udp --dport domain -j ACCEPT
+  $IPTABLES -A allow-dns-traffic-out -p tcp --dport domain -j ACCEPT
   #WEB
   $IPTABLES -N allow-www-traffic-out
   $IPTABLES -F allow-www-traffic-out
